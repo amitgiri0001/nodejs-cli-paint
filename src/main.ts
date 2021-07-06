@@ -3,20 +3,22 @@ import { OperationsController } from "./OperationsController";
 const operations = new OperationsController();
 
 operations.createCanvas({
-  height: 10,
-  width: 10
+  height: 70,
+  width: 70
 });
 
 operations.drawLine({
-  x1: 8,
-  y1: 1,
-  x2: 8,
-  y2: 9,
+  x1: 10,
+  y1: 20,
+  x2: 70,
+  y2: 20,
 });
 
-operations.drawLine({
-  x1: 0,
-  y1: 2,
-  x2: 15,
-  y2: 2,
+
+
+operations.drawRectangle({
+  startX: 10,
+  startY: 10,
+  endX: 40,
+  endY: 40,
 });

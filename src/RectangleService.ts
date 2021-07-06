@@ -7,9 +7,13 @@ export class RectangleService extends LineService {
     }
 
     getRectangleCoordinates(rectangle: Rectangle): number[][] {
-        const topLine = this.generateHorizontalPositions(rectangle.endY, rectangle.startX, rectangle.endX);
-        const bottomLine = this.generateHorizontalPositions(rectangle.startY, rectangle.startX, rectangle.endX);
-        return [[1]];
+        const { startX, startY, endX, endY } = rectangle; 
+        const topLine = this.generateHorizontalPositions(startY, startX, endX);
+        const bottomLine = this.generateHorizontalPositions(endY, startX, endX);
+        const leftLine = this.generateVerticalPositions(startX, startY, endY);
+        const rightLine = this.generateVerticalPositions(endX, startY, endY);
+
+        return [].concat(topLine, bottomLine, leftLine, rightLine);
     }
 
 

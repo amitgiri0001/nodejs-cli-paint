@@ -25,13 +25,24 @@ export class OperationsController {
     }
 
     drawLine (line: Line): void {
-        const lineMatrix = this.lineService.getLineCoordinates(line);
+        let lineMatrix = [];
+        const lineType = this.lineService.getOrientation(line);
+
+        if(lineType === LineService.LINE_TYPES.HORIZONTAL) {
+            lineMatrix = this.lineService.generateHorizontalPositions(line.y1, line.x1, line.x2);
+        }
+        else if(lineType === LineService.LINE_TYPES.VERTICAL) {
+            lineMatrix = this.lineService.generateVerticalPositions(line.x1, line.y1, line.y2);
+        }
+
         this.canvasMatrix = this.addToCanvas(this.canvasMatrix, lineMatrix);
         this.render(this.canvasMatrix);
     }
 
-    drawRectangle (rectangleCorners: Rectangle) {
-        const rectangle = this.rectangleService.
+    drawRectangle (rectangleCorners: Rectangle): void {
+        const rectangleMatrix = this.rectangleService.getRectangleCoordinates(rectangleCorners);
+        this.canvasMatrix = this.addToCanvas(this.canvasMatrix, rectangleMatrix);
+        this.render(this.canvasMatrix);
     }
 
     private render(screenMatrix: Array<Array<string>>): void  {
@@ -45,9 +56,9 @@ export class OperationsController {
         }
     }
 
-    private addToCanvas(canvasMatrix: Array<Array<string>>, lineMatrix: Array<Array<number>>): string[][]  {
-        while(lineMatrix.length) {
-            const pixelPositions = lineMatrix.shift();
+    private addToCanvas(canvasMatrix: Array<Array<string>>, dataMatrix: Array<Array<number>>): string[][]  {
+        while(dataMatrix.length) {
+            const pixelPositions = dataMatrix.shift();
             canvasMatrix[pixelPositions[0]][pixelPositions[1]] = LINE_INDICATOR;
         } 
 

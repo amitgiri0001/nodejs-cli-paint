@@ -7,19 +7,6 @@ export class LineService {
         NON_STRAIGHT: 'NON_STRAIGHT',
     }
 
-    getLineCoordinates(line: Line): Array<Array<number>> {
-      const lineType = this.getOrientation(line);
-
-      switch (lineType) {
-        case LineService.LINE_TYPES.HORIZONTAL:
-            return this.generateHorizontalPositions(line.y1, line.x1, line.x2);
-        case LineService.LINE_TYPES.VERTICAL:
-            return this.generateVerticalPositions(line.x1, line.y1, line.y2);
-        default:
-            throw new Error('Not Implemented');
-      }
-    }
-
     generateVerticalPositions(x : number, y1: number, y2: number): number[][] {
         const pixelPositions = [];
         let fromRow = Math.min(y1, y2);
@@ -42,7 +29,7 @@ export class LineService {
         return pixelPositions;
     }
 
-    private getOrientation(line: Line) {
+    getOrientation(line: Line): string {
         // Not moving sidewise
         if(line.x1 === line.x2) { 
             return LineService.LINE_TYPES.VERTICAL;
