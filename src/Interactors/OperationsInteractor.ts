@@ -7,7 +7,7 @@ import { LineService } from "../services/LineService";
 import { Rectangle } from "../models/RectangleModel";
 import { RectangleService } from "../services/RectangleService";
 
-export class OperationsService {
+export class OperationsInteractor {
     private canvasService: CanvasService;
     private lineService: LineService;
     private canvasMatrix: Array<Array<string>>;
