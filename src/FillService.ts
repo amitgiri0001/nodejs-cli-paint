@@ -1,4 +1,4 @@
-import { EMPTY_SPACE } from "./Components";
+import {  HORIZONTAL_BOUNDARIES, LINE_INDICATOR, VERTICAL_BOUNDARIES } from "./Components";
 
 export class FillService {
     tempCanvasMatrix: string[][] = [[]];
@@ -41,7 +41,8 @@ export class FillService {
      */
     private isInside(currentNodeValue: string) {
         // When the coordinates are not empty to be painted.
-        if(currentNodeValue !== EMPTY_SPACE) return true;
+        //if(currentNodeValue !== EMPTY_SPACE) return true;
+        if([VERTICAL_BOUNDARIES, HORIZONTAL_BOUNDARIES, LINE_INDICATOR].includes(currentNodeValue)) return true;
 
         // When the coordinates are already painted
         if(currentNodeValue === this.fillColor) return true;

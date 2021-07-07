@@ -7,13 +7,12 @@ import { LineService } from "./LineService";
 import { Rectangle } from "./RectangleModel";
 import { RectangleService } from "./RectangleService";
 
-// TODO validate or reset to min and max for x and Y according to the canvas
 export class OperationsController {
-    canvasService: CanvasService;
-    lineService: LineService;
-    canvasMatrix: Array<Array<string>>;
-    rectangleService: RectangleService;
-    fillService: FillService;
+    private canvasService: CanvasService;
+    private lineService: LineService;
+    private canvasMatrix: Array<Array<string>>;
+    private rectangleService: RectangleService;
+    private fillService: FillService;
 
     constructor() {
         this.canvasService = new CanvasService();
@@ -54,6 +53,7 @@ export class OperationsController {
     }
 
     private render(screenMatrix: Array<Array<string>>): void  {
+        console.log('\n\n\n');
         for (let level = 0; level < screenMatrix.length; level++) {
             const row = screenMatrix[level];
             let rowPixels = '';
@@ -62,6 +62,7 @@ export class OperationsController {
             }
             console.log(rowPixels);
         }
+        console.log('\n\n\n');
     }
 
     private addToCanvas(canvasMatrix: Array<Array<string>>, dataMatrix: Array<Array<number>>): string[][]  {
@@ -72,15 +73,4 @@ export class OperationsController {
 
         return canvasMatrix;
     }
-    // createRectangle (x1: number, y1: number, x2: number, y2: number) {
-        
-    // }
-
-    // fill (x: number, y: number, color: string) {
-        
-    // }
-
-    // quit () {
-        
-    // }
 }
