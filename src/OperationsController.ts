@@ -1,6 +1,7 @@
 import { Canvas } from "./CanvasModel";
 import { CanvasService } from "./CanvasService";
 import { LINE_INDICATOR } from "./Components";
+import { FillService } from "./FillService";
 import { Line } from "./LineModel";
 import { LineService } from "./LineService";
 import { Rectangle } from "./RectangleModel";
@@ -12,15 +13,17 @@ export class OperationsController {
     lineService: LineService;
     canvasMatrix: Array<Array<string>>;
     rectangleService: RectangleService;
+    fillService: FillService;
 
     constructor() {
         this.canvasService = new CanvasService();
         this.lineService = new LineService();
         this.rectangleService = new RectangleService();
+        this.fillService = new FillService();
     }
 
     createCanvas (canvas: Canvas): void {
-        this.canvasMatrix = this.canvasService.generateCanvasCoordinates(canvas);
+        this.canvasMatrix = this.canvasService.generateCanvas(canvas);
         this.render(this.canvasMatrix);
     }
 
@@ -42,6 +45,11 @@ export class OperationsController {
     drawRectangle (rectangleCorners: Rectangle): void {
         const rectangleMatrix = this.rectangleService.getRectangleCoordinates(rectangleCorners);
         this.canvasMatrix = this.addToCanvas(this.canvasMatrix, rectangleMatrix);
+        this.render(this.canvasMatrix);
+    }
+
+    fillColor(x: number, y: number, color: string): void {
+        this.canvasMatrix = this.fillService.fill(x, y, color,this.canvasMatrix);
         this.render(this.canvasMatrix);
     }
 

@@ -30,11 +30,11 @@ export class LineService {
     }
 
     getOrientation(line: Line): string {
-        // Not moving sidewise
+        // Constant column
         if(line.x1 === line.x2) { 
             return LineService.LINE_TYPES.VERTICAL;
         }
-        // Constant height
+        // Constant row
         else if(line.y1 === line.y2) { 
             return LineService.LINE_TYPES.HORIZONTAL;
         }

@@ -22,3 +22,9 @@ operations.drawRectangle({
   endX: 40,
   endY: 40,
 });
+
+operations.fillColor(
+1,
+1,
+'O' 
+);
