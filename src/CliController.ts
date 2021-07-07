@@ -1,7 +1,7 @@
 import  { prompt, Separator } from 'inquirer';
 import { OperationsController } from './OperationsController';
 
-export class CLI {
+export class CliController {
     private canvas = {
         width: 0,
         height: 0,

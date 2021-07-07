@@ -1,6 +1,6 @@
 // import { OperationsController } from "./OperationsController";
 
-import { CLI } from "./CLI";
+import { CliController } from "./CliController";
 
 // const operations = new OperationsController();
 
@@ -31,4 +31,4 @@ import { CLI } from "./CLI";
 // 'O' 
 // );
 
-new CLI().start();
+new CliController().start();
