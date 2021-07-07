@@ -2,9 +2,9 @@ import { Canvas } from "../models/CanvasModel";
 import { CanvasService } from "../services/CanvasService";
 import { LINE_INDICATOR } from "../Components";
 import { FillService } from "../services/FillService";
-import { Line } from "../models/LineModel";
+import { LineCoordinates } from "../models/LineCoordinatesModel";
 import { LineService } from "../services/LineService";
-import { Rectangle } from "../models/RectangleModel";
+import { RectangleCoordinates } from "../models/RectangleCoordinatesModel";
 import { RectangleService } from "../services/RectangleService";
 
 export class OperationsInteractor {
@@ -26,7 +26,7 @@ export class OperationsInteractor {
         this.render(this.canvasMatrix);
     }
 
-    drawLine (line: Line): void {
+    drawLine (line: LineCoordinates): void {
         let lineMatrix = [];
         const lineType = this.lineService.getOrientation(line);
 
@@ -41,7 +41,7 @@ export class OperationsInteractor {
         this.render(this.canvasMatrix);
     }
 
-    drawRectangle (rectangleCorners: Rectangle): void {
+    drawRectangle (rectangleCorners: RectangleCoordinates): void {
         const rectangleMatrix = this.rectangleService.getRectangleCoordinates(rectangleCorners);
         this.canvasMatrix = this.addToCanvas(this.canvasMatrix, rectangleMatrix);
         this.render(this.canvasMatrix);

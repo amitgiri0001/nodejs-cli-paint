@@ -1,4 +1,4 @@
-import { Rectangle } from "../models/RectangleModel";
+import { RectangleCoordinates } from "../models/RectangleCoordinatesModel";
 import { LineService } from './LineService';
 
 export class RectangleService extends LineService {
@@ -6,8 +6,8 @@ export class RectangleService extends LineService {
         super()
     }
 
-    getRectangleCoordinates(rectangle: Rectangle): number[][] {
-        const { startX, startY, endX, endY } = rectangle; 
+    getRectangleCoordinates(rectangle: RectangleCoordinates): number[][] {
+        const { x1: startX, y1: startY, x2: endX, y2: endY } = rectangle; 
         const topLine = this.generateHorizontalPositions(startY, startX, endX);
         const bottomLine = this.generateHorizontalPositions(endY, startX, endX);
         const leftLine = this.generateVerticalPositions(startX, startY, endY);

@@ -1,4 +1,4 @@
-import { Line } from "../models/LineModel";
+import { LineCoordinates } from "../models/LineCoordinatesModel";
 
 export class LineService {
     static LINE_TYPES = {
@@ -29,7 +29,7 @@ export class LineService {
         return pixelPositions;
     }
 
-    getOrientation(line: Line): string {
+    getOrientation(line: LineCoordinates): string {
         // Constant column
         if(line.x1 === line.x2) { 
             return LineService.LINE_TYPES.VERTICAL;

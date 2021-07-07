@@ -69,7 +69,7 @@ export class CliController {
         const { x1, y1, x2, y2 } = await this.getCoordinatesFromUser();
         console.log(`Creating Rectangle for following coordinates: [${x1},${y1}] [${x2},${y2}]`);
         
-        this.actions.drawRectangle({ startX: x1, startY: y1, endX: x2, endY: y2 });
+        this.actions.drawRectangle({ x1, y1, x2, y2 });
     }
 
     private async filleColorCommand(): Promise<void> {
