@@ -1,13 +1,13 @@
-import { Canvas } from "./CanvasModel";
-import { CanvasService } from "./CanvasService";
-import { LINE_INDICATOR } from "./Components";
-import { FillService } from "./FillService";
-import { Line } from "./LineModel";
-import { LineService } from "./LineService";
-import { Rectangle } from "./RectangleModel";
-import { RectangleService } from "./RectangleService";
+import { Canvas } from "../models/CanvasModel";
+import { CanvasService } from "../services/CanvasService";
+import { LINE_INDICATOR } from "../Components";
+import { FillService } from "../services/FillService";
+import { Line } from "../models/LineModel";
+import { LineService } from "../services/LineService";
+import { Rectangle } from "../models/RectangleModel";
+import { RectangleService } from "../services/RectangleService";
 
-export class OperationsController {
+export class OperationsService {
     private canvasService: CanvasService;
     private lineService: LineService;
     private canvasMatrix: Array<Array<string>>;

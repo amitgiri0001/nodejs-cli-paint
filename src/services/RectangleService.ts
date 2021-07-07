@@ -1,4 +1,4 @@
-import { Rectangle } from "./RectangleModel";
+import { Rectangle } from "../models/RectangleModel";
 import { LineService } from './LineService';
 
 export class RectangleService extends LineService {

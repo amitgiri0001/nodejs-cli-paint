@@ -1,15 +1,15 @@
 import  { prompt, Separator } from 'inquirer';
-import { OperationsController } from './OperationsController';
+import { OperationsInteractor } from '../Interactors/OperationsInteractor';
 
 export class CliController {
     private canvas = {
         width: 0,
         height: 0,
     }
-    actions: OperationsController;
+    actions: OperationsInteractor;
 
     constructor() {
-        this.actions = new OperationsController();
+        this.actions = new OperationsInteractor();
     }
 
     private DRAWING_OPTIONS = {

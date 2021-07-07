@@ -1,5 +1,5 @@
-import { Canvas } from "./CanvasModel";
-import { VERTICAL_BOUNDARIES, HORIZONTAL_BOUNDARIES, EMPTY_SPACE,  } from "./Components";
+import { Canvas } from "../models/CanvasModel";
+import { VERTICAL_BOUNDARIES, HORIZONTAL_BOUNDARIES, EMPTY_SPACE,  } from "../Components";
 
 export class CanvasService {
     generateCanvas(canvas: Canvas): Array<Array<string>> {

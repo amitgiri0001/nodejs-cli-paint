@@ -1,6 +1,6 @@
 // import { OperationsController } from "./OperationsController";
 
-import { CliController } from "./CliController";
+import { CliController } from "./controllers/CliController";
 
 // const operations = new OperationsController();
 

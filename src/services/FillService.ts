@@ -1,4 +1,4 @@
-import {  HORIZONTAL_BOUNDARIES, LINE_INDICATOR, VERTICAL_BOUNDARIES } from "./Components";
+import {  HORIZONTAL_BOUNDARIES, LINE_INDICATOR, VERTICAL_BOUNDARIES } from "../Components";
 
 export class FillService {
     tempCanvasMatrix: string[][] = [[]];

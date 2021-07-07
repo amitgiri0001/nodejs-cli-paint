@@ -1,4 +1,4 @@
-import { Line } from "./LineModel";
+import { Line } from "../models/LineModel";
 
 export class LineService {
     static LINE_TYPES = {
