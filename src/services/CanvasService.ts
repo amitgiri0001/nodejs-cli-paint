@@ -2,6 +2,11 @@ import { Canvas } from "../models/CanvasModel";
 import { VERTICAL_BOUNDARIES, HORIZONTAL_BOUNDARIES, EMPTY_SPACE,  } from "../Components";
 
 export class CanvasService {
+   /**
+   * 
+   * @param canvas height and width of canvas
+   * @returns Array matrix for canvas
+   */
     generateCanvas(canvas: Canvas): Array<Array<string>> {
       const rowList = [];
       const screenMargin = 2;

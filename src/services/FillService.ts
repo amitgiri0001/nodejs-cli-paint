@@ -4,6 +4,14 @@ export class FillService {
     tempCanvasMatrix: string[][] = [[]];
     fillColor = 'c';
 
+    /**
+     * 
+     * @param x Painting start coordinate x
+     * @param y Painting start coordinate y
+     * @param color Painting color
+     * @param canvasMatrix Current canvas status
+     * @returns new canvas matrix with painted value
+     */
     fill(x: number, y: number, color: string = this.fillColor,canvasMatrix: string[][]): string[][] {
         this.fillColor = color;
         this.tempCanvasMatrix = [...canvasMatrix];
@@ -12,6 +20,11 @@ export class FillService {
         return this.tempCanvasMatrix;
     }
 
+    /**
+     * 
+     * @param x 
+     * @param y 
+     */
     private findAndFillCoordinates(x: number, y: number) {
         const nodes = [{ col: x ,  row: y }];
 
@@ -35,13 +48,15 @@ export class FillService {
 
     /**
      * 
-     * @param currentNodeValue 
+     * @param currentNodeValue value of current node position
      * @returns bool
      * "Inside" means, it is not inside any "filled" area.
      */
     private isInside(currentNodeValue: string) {
         // When the coordinates are not empty to be painted.
         //if(currentNodeValue !== EMPTY_SPACE) return true;
+
+        // When the node is not either of below
         if([VERTICAL_BOUNDARIES, HORIZONTAL_BOUNDARIES, LINE_INDICATOR].includes(currentNodeValue)) return true;
 
         // When the coordinates are already painted
@@ -50,6 +65,12 @@ export class FillService {
         return false;
     }
 
+    /**
+     * 
+     * @param row 
+     * @param col 
+     * @returns 
+     */
     private isInCanvasArea(row: number, col: number) {
         // When the rows are going out of range
         if(row < 0 || row > this.tempCanvasMatrix.length - 1) return false;

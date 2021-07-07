@@ -21,11 +21,17 @@ export class CliController {
         QUIT: `Quit`,
     };
 
+    /**
+     * Starting point of the CLI base interaction
+     */
     async start(): Promise<void> {
         await this.createCanvasCommand();
         await this.drawingStartCommand();
     }
 
+    /**
+     * CLI interaction loop to get commands
+     */
     private async drawingStartCommand(): Promise<void> {
         const { drawingOption } =  await prompt([{
             type: 'list',
@@ -54,6 +60,9 @@ export class CliController {
         await this.drawingStartCommand();
     }
 
+    /**
+     * Calls drawLine operation on command
+     */
     private async createLineCommand(): Promise<void> {
         console.info('Enter the coordinates for the Line \n');
         
@@ -63,6 +72,9 @@ export class CliController {
         this.actions.drawLine({ x1, y1, x2, y2 });
     }
 
+    /**
+     * Calls drawRectangle operation on command
+     */
     private async createRectangleCommand(): Promise<void> {
         console.info('Enter the coordinates for the Rectangle \n');
         
@@ -72,6 +84,9 @@ export class CliController {
         this.actions.drawRectangle({ x1, y1, x2, y2 });
     }
 
+    /**
+     * Calls fillColor operation on command
+     */
     private async filleColorCommand(): Promise<void> {
         console.info('Enter the coordinates to paint \n');
         
@@ -93,6 +108,9 @@ export class CliController {
         this.actions.fillColor(x1, y1, color);
     }
 
+    /**
+     * Calls createCanvas operation on command
+     */
     private async createCanvasCommand(): Promise<void> {
         console.info('Enter the size of the canvas \n');
         const {canvasWidth, canvasHeight  } = await prompt([{
@@ -125,6 +143,11 @@ export class CliController {
         })
     }
 
+    /**
+     * Validator for CLI input for coordinates
+     * @param input 
+     * @returns 
+     */
     private async inputCoordinateValidator(input: string | number): Promise<boolean | string> {
         if(input && !isNaN(+input) && input > 0) {
             return Promise.resolve(true);
@@ -132,6 +155,11 @@ export class CliController {
         return Promise.reject('Should be a valid number > 0');
     }
 
+    /**
+     * Prompts for input coordinates for drawing
+     * @param numberOfCoordinates default 2
+     * @returns coordinates
+     */
     private async getCoordinatesFromUser(numberOfCoordinates = 2): Promise<{
         x1: number,
         x2: number,

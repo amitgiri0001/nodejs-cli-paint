@@ -6,6 +6,11 @@ export class RectangleService extends LineService {
         super()
     }
 
+    /**
+     * 
+     * @param rectangle Rectangle coordinates
+     * @returns Array Matrix for rectangle
+     */
     getRectangleCoordinates(rectangle: RectangleCoordinates): number[][] {
         const { x1: startX, y1: startY, x2: endX, y2: endY } = rectangle; 
         const topLine = this.generateHorizontalPositions(startY, startX, endX);

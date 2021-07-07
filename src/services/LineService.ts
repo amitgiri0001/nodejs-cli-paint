@@ -1,5 +1,4 @@
 import { LineCoordinates } from "../models/LineCoordinatesModel";
-
 export class LineService {
     static LINE_TYPES = {
         HORIZONTAL: 'HORIZONTAL',
@@ -7,6 +6,13 @@ export class LineService {
         NON_STRAIGHT: 'NON_STRAIGHT',
     }
 
+    /**
+     * 
+     * @param x Common column coordinates that remains unchanged
+     * @param y1 Vertical line coordinates start
+     * @param y2 Vertical line coordinates end
+     * @returns Array matrix of line in canvas
+     */
     generateVerticalPositions(x : number, y1: number, y2: number): number[][] {
         const pixelPositions = [];
         let fromRow = Math.min(y1, y2);
@@ -18,6 +24,13 @@ export class LineService {
         return pixelPositions;
     }
 
+    /**
+     * 
+     * @param y Common row coordinates that remains unchanged
+     * @param x1 Horizontal line coordinates start
+     * @param x2 Horizontal line coordinates end
+     * @returns Array matrix of line in canvas
+     */
     generateHorizontalPositions(y : number, x1: number, x2: number): number[][] {
         const pixelPositions = [];
         let fromColumn = Math.min(x1, x2);
@@ -29,6 +42,11 @@ export class LineService {
         return pixelPositions;
     }
 
+    /**
+     * 
+     * @param line Line coordinates
+     * @returns line's orientation in string
+     */
     getOrientation(line: LineCoordinates): string {
         // Constant column
         if(line.x1 === line.x2) { 

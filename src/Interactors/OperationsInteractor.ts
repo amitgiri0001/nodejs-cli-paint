@@ -21,11 +21,19 @@ export class OperationsInteractor {
         this.fillService = new FillService();
     }
 
+    /**
+     * Creates canvas on std output
+     * @param canvas width and height of Canvas
+     */
     createCanvas (canvas: Canvas): void {
         this.canvasMatrix = this.canvasService.generateCanvas(canvas);
         this.render(this.canvasMatrix);
     }
 
+    /**
+     * Draws line on std output
+     * @param line line coordinates
+     */
     drawLine (line: LineCoordinates): void {
         let lineMatrix = [];
         const lineType = this.lineService.getOrientation(line);
@@ -41,17 +49,31 @@ export class OperationsInteractor {
         this.render(this.canvasMatrix);
     }
 
+    /**
+     * Draws rectangle on std output
+     * @param rectangleCorners rectangle coordinates
+     */
     drawRectangle (rectangleCorners: RectangleCoordinates): void {
         const rectangleMatrix = this.rectangleService.getRectangleCoordinates(rectangleCorners);
         this.canvasMatrix = this.addToCanvas(this.canvasMatrix, rectangleMatrix);
         this.render(this.canvasMatrix);
     }
 
+    /**
+     * Paints area with given coordinates
+     * @param x 
+     * @param y 
+     * @param color 
+     */
     fillColor(x: number, y: number, color: string): void {
         this.canvasMatrix = this.fillService.fill(x, y, color,this.canvasMatrix);
         this.render(this.canvasMatrix);
     }
 
+    /**
+     * Prints the final canvas output on std output
+     * @param screenMatrix final matrix to plot on screen
+     */
     private render(screenMatrix: Array<Array<string>>): void  {
         console.log('\n\n\n');
         for (let level = 0; level < screenMatrix.length; level++) {
@@ -65,6 +87,12 @@ export class OperationsInteractor {
         console.log('\n\n\n');
     }
 
+    /**
+     * Maps drawing elements to current canvas matrix to be plotted by render()
+     * @param canvasMatrix 
+     * @param dataMatrix 
+     * @returns new canvasMatrix
+     */
     private addToCanvas(canvasMatrix: Array<Array<string>>, dataMatrix: Array<Array<number>>): string[][]  {
         while(dataMatrix.length) {
             const pixelPositions = dataMatrix.shift();
