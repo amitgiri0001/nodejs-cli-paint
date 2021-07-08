@@ -7,7 +7,7 @@ export class CanvasService {
    * @param canvas height and width of canvas
    * @returns Array matrix for canvas
    */
-    generateCanvas(canvas: Canvas): Array<Array<string>> {
+    generateCanvasMatrix(canvas: Canvas): Array<Array<string>> {
       const rowList = [];
       const screenMargin = 2;
 
