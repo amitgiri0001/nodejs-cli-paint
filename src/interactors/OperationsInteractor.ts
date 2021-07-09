@@ -44,6 +44,9 @@ export class OperationsInteractor {
         else if(lineType === LineService.LINE_TYPES.VERTICAL) {
             lineMatrix = this.lineService.generateVerticalPositions(line.x1, line.y1, line.y2);
         }
+        else {
+            console.log(`Line coordinates are not straight.`);
+        }
 
         this.canvasMatrix = this.addToCanvasMatrix(this.canvasMatrix, lineMatrix);
         return this.canvasMatrix;
@@ -54,7 +57,8 @@ export class OperationsInteractor {
      * @param rectangleCorners rectangle coordinates
      */
     drawRectangle (rectangleCorners: RectangleCoordinates): string[][] {
-        const rectangleMatrix = this.rectangleService.getRectangleCoordinates(rectangleCorners);
+        const {topLine, bottomLine, leftLine, rightLine} = this.rectangleService.getRectangleCoordinates(rectangleCorners);
+        const rectangleMatrix: number[][] = [].concat(topLine, bottomLine, leftLine, rightLine);
         this.canvasMatrix = this.addToCanvasMatrix(this.canvasMatrix, rectangleMatrix);
         return this.canvasMatrix;
     }
