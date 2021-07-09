@@ -2,6 +2,7 @@ jest.mock('inquirer');
 import { CliController } from "../../src/controllers/CliController";
 import { prompt } from 'inquirer';
 import { OperationsInteractor } from "../../src/interactors/OperationsInteractor";
+import { DRAWING_OPTIONS } from "../../src/commands";
 
 describe('CliController (acceptance)', () => {
     // TODO remove this
@@ -49,9 +50,9 @@ describe('CliController (acceptance)', () => {
                 const cli = new CliController();
                 
                 // Command input sequence
-                promptMock.mockResolvedValueOnce({ drawingOption: cli.DRAWING_OPTIONS.LINE }) ;
+                promptMock.mockResolvedValueOnce({ drawingOption: DRAWING_OPTIONS.LINE }) ;
                 promptMock.mockResolvedValueOnce({ x1: 1, y1:1, x2:2, y2:1 });
-                promptMock.mockResolvedValueOnce({ drawingOption: cli.DRAWING_OPTIONS.QUIT });
+                promptMock.mockResolvedValueOnce({ drawingOption: DRAWING_OPTIONS.QUIT });
     
                 await cli.drawingStartCommand();
     
@@ -68,9 +69,9 @@ describe('CliController (acceptance)', () => {
                 const cli = new CliController();
                 
                 // Command input sequence
-                promptMock.mockResolvedValueOnce({ drawingOption: cli.DRAWING_OPTIONS.RECTANGLE }) ;
+                promptMock.mockResolvedValueOnce({ drawingOption: DRAWING_OPTIONS.RECTANGLE }) ;
                 promptMock.mockResolvedValueOnce({ x1: 1, y1:1, x2:2, y2:2 });
-                promptMock.mockResolvedValueOnce({ drawingOption: cli.DRAWING_OPTIONS.QUIT });
+                promptMock.mockResolvedValueOnce({ drawingOption: DRAWING_OPTIONS.QUIT });
     
                 await cli.drawingStartCommand();
     
@@ -87,10 +88,10 @@ describe('CliController (acceptance)', () => {
                 const cli = new CliController();
                 
                 // Command input sequence
-                promptMock.mockResolvedValueOnce({ drawingOption: cli.DRAWING_OPTIONS.COLOR }) ;
+                promptMock.mockResolvedValueOnce({ drawingOption: DRAWING_OPTIONS.COLOR }) ;
                 promptMock.mockResolvedValueOnce({ x1: 1, y1:1 });
                 promptMock.mockResolvedValueOnce({ color: 'c' });
-                promptMock.mockResolvedValueOnce({ drawingOption: cli.DRAWING_OPTIONS.QUIT });
+                promptMock.mockResolvedValueOnce({ drawingOption: DRAWING_OPTIONS.QUIT });
     
                 await cli.drawingStartCommand();
     
@@ -107,9 +108,9 @@ describe('CliController (acceptance)', () => {
                 const cli = new CliController();
                 
                 // Command input sequence
-                promptMock.mockResolvedValueOnce({ drawingOption: cli.DRAWING_OPTIONS.NEW_Canvas }) ;
+                promptMock.mockResolvedValueOnce({ drawingOption: DRAWING_OPTIONS.NEW_Canvas }) ;
                 promptMock.mockResolvedValueOnce({canvasWidth: 3, canvasHeight:3  })
-                promptMock.mockResolvedValueOnce({ drawingOption: cli.DRAWING_OPTIONS.QUIT });
+                promptMock.mockResolvedValueOnce({ drawingOption: DRAWING_OPTIONS.QUIT });
     
                 await cli.drawingStartCommand();
     
@@ -125,7 +126,7 @@ describe('CliController (acceptance)', () => {
                 const cli = new CliController();
                 
                 // Command input sequence
-                promptMock.mockResolvedValueOnce({ drawingOption: cli.DRAWING_OPTIONS.QUIT });
+                promptMock.mockResolvedValueOnce({ drawingOption: DRAWING_OPTIONS.QUIT });
     
                 await cli.drawingStartCommand();
     

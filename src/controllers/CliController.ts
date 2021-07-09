@@ -1,4 +1,5 @@
-import  { prompt, Separator } from 'inquirer';
+import  { prompt } from 'inquirer';
+import { DRAWING_OPTIONS, DRAWING_OPTIONS_PROMPT, FILL_PROMPT, GET_COORDINATES_PROMPTS, NEW_CANVAS_PROMPT } from '../commands';
 import { OperationsInteractor } from '../interactors/OperationsInteractor';
 
 export class CliController {
@@ -11,15 +12,6 @@ export class CliController {
     constructor() {
         this.operations = new OperationsInteractor();
     }
-
-    DRAWING_OPTIONS = {
-        LINE: `Line`,
-        RECTANGLE: `Rectangle`,
-        COLOR: `Color`,
-        SEPARATOR: new Separator(),
-        NEW_Canvas: `New Canvas`,
-        QUIT: `Quit`,
-    };
 
     /**
      * Starting point of the CLI base interaction
@@ -35,27 +27,22 @@ export class CliController {
      */
     async drawingStartCommand(): Promise<void> {
         let canvasMatrix = [[]];
-        const { drawingOption } =  await prompt([{
-            type: 'list',
-            name: 'drawingOption',
-            prefix: 'Try drawing in canvas with:',
-            choices: Object.values(this.DRAWING_OPTIONS)
-        }]);
+        const { drawingOption } =  await prompt(DRAWING_OPTIONS_PROMPT);
 
         switch (drawingOption) {
-            case this.DRAWING_OPTIONS.LINE:
+            case DRAWING_OPTIONS.LINE:
                 canvasMatrix = await this.createLineCommand();
                 break;
-            case this.DRAWING_OPTIONS.RECTANGLE:
+            case DRAWING_OPTIONS.RECTANGLE:
                 canvasMatrix = await this.createRectangleCommand();
                 break;
-            case this.DRAWING_OPTIONS.COLOR:
+            case DRAWING_OPTIONS.COLOR:
                 canvasMatrix = await this.filleColorCommand();
                 break;
-            case this.DRAWING_OPTIONS.NEW_Canvas:
+            case DRAWING_OPTIONS.NEW_Canvas:
                 canvasMatrix = await this.createCanvasCommand();
                 break;
-            case this.DRAWING_OPTIONS.QUIT:
+            case DRAWING_OPTIONS.QUIT:
                 return this.quitCommand();
         }
 
@@ -100,17 +87,7 @@ export class CliController {
         console.info('Enter the coordinates to paint \n');
         
         const { x1, y1 } = await this.getCoordinatesFromUser(1);
-        const { color } = await prompt([{
-            type: 'input',
-            name: 'color',
-            message: 'Choose a character to paint',
-            validate: async (input: string) => {
-                if(input && isNaN(+input) && input.length === 1) {
-                    return Promise.resolve(true);
-                }
-                return Promise.reject('A single character is required.');
-            }
-        }]);
+        const { color } = await prompt(FILL_PROMPT);
 
         console.log(`Painting for following coordinates: [${x1},${y1}]`);
         
@@ -122,26 +99,7 @@ export class CliController {
      */
     private async createCanvasCommand(): Promise<string[][]> {
         console.info('Enter the size of the canvas \n');
-        const {canvasWidth, canvasHeight  } = await prompt([{
-            type: 'input',
-            name: 'canvasWidth',
-            message: 'width', 
-            suffix: '(number)',
-            validate: (input) => {
-               return input && !isNaN(+input) && +input > 0;
-            },
-            default: 10
-        },
-        {
-            type: 'input',
-            name: 'canvasHeight',
-            message: 'height',
-            suffix: '(number)',
-            validate: (input) => {
-               return input && !isNaN(+input) && +input > 0;
-            },
-            default: 10
-        }]);
+        const {canvasWidth, canvasHeight  } = await prompt(NEW_CANVAS_PROMPT);
 
         this.canvas.width = +canvasWidth;
         this.canvas.height = +canvasHeight;
@@ -150,18 +108,6 @@ export class CliController {
             width: this.canvas.width,
             height: this.canvas.height,
         });
-    }
-
-    /**
-     * Validator for CLI input for coordinates
-     * @param input 
-     * @returns 
-     */
-    private async inputCoordinateValidator(input: string | number): Promise<boolean | string> {
-        if(input && !isNaN(+input) && input > 0) {
-            return Promise.resolve(true);
-        }
-        return Promise.reject('Should be a valid number > 0');
     }
 
     /**
@@ -175,28 +121,7 @@ export class CliController {
         y1: number,
         y2: number
     }> {
-        let { x1, y1, x2, y2 } =  await prompt([{
-            type: 'input',
-            name: 'x1',
-            validate: this.inputCoordinateValidator
-        },
-        {
-            type: 'input',
-            name: 'y1',
-            validate: this.inputCoordinateValidator,
-        },
-        {
-            type: 'input',
-            name: 'x2',
-            validate: this.inputCoordinateValidator,
-            when: () => numberOfCoordinates > 1
-        },
-        {
-            type: 'input',
-            name: 'y2',
-            validate: this.inputCoordinateValidator,
-            when: () => numberOfCoordinates > 1
-        }]);
+        let { x1, y1, x2, y2 } =  await prompt(GET_COORDINATES_PROMPTS(numberOfCoordinates));
 
         x1 = Math.min(this.canvas.width, x1);
         x2 = Math.min(this.canvas.width, x2);
