@@ -10,9 +10,12 @@ import { RectangleService } from "../services/RectangleService";
 export class OperationsInteractor {
     private canvasService: CanvasService;
     private lineService: LineService;
-    private canvasMatrix: Array<Array<string>>;
+    private _canvasMatrix: Array<Array<string>>;
     private rectangleService: RectangleService;
     private fillService: FillService;
+    get canvasMatrix(): string[][]  {
+        return this._canvasMatrix;
+    }
 
     constructor() {
         this.canvasService = new CanvasService();
@@ -26,8 +29,8 @@ export class OperationsInteractor {
      * @param canvas width and height of Canvas
      */
     createCanvas (canvas: Canvas): string[][] {
-        this.canvasMatrix = this.canvasService.generateCanvasMatrix(canvas);
-        return this.canvasMatrix;
+        this._canvasMatrix = this.canvasService.generateCanvasMatrix(canvas);
+        return this._canvasMatrix;
     }
 
     /**
@@ -48,8 +51,8 @@ export class OperationsInteractor {
             console.log(`Line coordinates are not straight.`);
         }
 
-        this.canvasMatrix = this.addToCanvasMatrix(this.canvasMatrix, lineMatrix);
-        return this.canvasMatrix;
+        this._canvasMatrix = this.addToCanvasMatrix(this._canvasMatrix, lineMatrix);
+        return this._canvasMatrix;
     }
 
     /**
@@ -57,10 +60,10 @@ export class OperationsInteractor {
      * @param rectangleCorners rectangle coordinates
      */
     drawRectangle (rectangleCorners: RectangleCoordinates): string[][] {
-        const {topLine, bottomLine, leftLine, rightLine} = this.rectangleService.getRectangleCoordinates(rectangleCorners);
+        const {topLine, bottomLine, leftLine, rightLine} = this.rectangleService.getALLRectangleCoordinates(rectangleCorners);
         const rectangleMatrix: number[][] = [].concat(topLine, bottomLine, leftLine, rightLine);
-        this.canvasMatrix = this.addToCanvasMatrix(this.canvasMatrix, rectangleMatrix);
-        return this.canvasMatrix;
+        this._canvasMatrix = this.addToCanvasMatrix(this._canvasMatrix, rectangleMatrix);
+        return this._canvasMatrix;
     }
 
     /**
@@ -70,8 +73,8 @@ export class OperationsInteractor {
      * @param color 
      */
     fillColor(x: number, y: number, color: string): string[][] {
-        this.canvasMatrix = this.fillService.fill(x, y, color,this.canvasMatrix);
-        return this.canvasMatrix;
+        this._canvasMatrix = this.fillService.fill(x, y, color,this._canvasMatrix);
+        return this._canvasMatrix;
     }
 
     /**

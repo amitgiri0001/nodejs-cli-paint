@@ -11,7 +11,7 @@ export class RectangleService extends LineService {
      * @param rectangle Rectangle coordinates
      * @returns Array Matrix for rectangle
      */
-    getRectangleCoordinates(rectangle: RectangleCoordinates):  { 
+     getALLRectangleCoordinates(rectangle: RectangleCoordinates):  { 
         topLine: number[][],
         bottomLine: number[][],
         leftLine: number[][],

@@ -6,13 +6,13 @@ export class CliController {
         width: 0,
         height: 0,
     }
-    operations: OperationsInteractor;
+    private operations: OperationsInteractor;
 
     constructor() {
         this.operations = new OperationsInteractor();
     }
 
-    private DRAWING_OPTIONS = {
+    DRAWING_OPTIONS = {
         LINE: `Line`,
         RECTANGLE: `Rectangle`,
         COLOR: `Color`,
@@ -33,7 +33,7 @@ export class CliController {
     /**
      * CLI interaction loop to get commands
      */
-    private async drawingStartCommand(): Promise<void> {
+    async drawingStartCommand(): Promise<void> {
         let canvasMatrix = [[]];
         const { drawingOption } =  await prompt([{
             type: 'list',
@@ -56,13 +56,17 @@ export class CliController {
                 canvasMatrix = await this.createCanvasCommand();
                 break;
             case this.DRAWING_OPTIONS.QUIT:
-                process.exit();
+                return this.quitCommand();
         }
 
         // Prints every thing on screen
         this.render(canvasMatrix);
 
         await this.drawingStartCommand();
+    }
+
+    quitCommand(): Promise<void> {
+        return process.exit();
     }
 
     /**
@@ -206,7 +210,7 @@ export class CliController {
      * Prints the final canvas output on std output
      * @param screenMatrix final matrix to plot on screen
      */
-     private render(screenMatrix: Array<Array<string>>): void  {
+     render(screenMatrix: Array<Array<string>>): void  {
         console.log('\n\n\n');
         for (let level = 0; level < screenMatrix.length; level++) {
             const row = screenMatrix[level];
