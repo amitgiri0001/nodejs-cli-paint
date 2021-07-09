@@ -5,8 +5,6 @@ import { OperationsInteractor } from "../../src/interactors/OperationsInteractor
 import { DRAWING_OPTIONS } from "../../src/commands";
 
 describe('CliController (acceptance)', () => {
-    // TODO remove this
-    jest.setTimeout(3000000)
     let promptMock: jest.MockedFunction<typeof prompt>;
 
     beforeEach(() => {
