@@ -1,5 +1,5 @@
 import  { prompt, Separator } from 'inquirer';
-import { OperationsInteractor } from '../Interactors/OperationsInteractor';
+import { OperationsInteractor } from '../interactors/OperationsInteractor';
 
 export class CliController {
     private canvas = {
@@ -124,7 +124,7 @@ export class CliController {
             message: 'width', 
             suffix: '(number)',
             validate: (input) => {
-               return input && !isNaN(+input);
+               return input && !isNaN(+input) && +input > 0;
             },
             default: 10
         },
@@ -134,7 +134,7 @@ export class CliController {
             message: 'height',
             suffix: '(number)',
             validate: (input) => {
-               return input && !isNaN(+input);
+               return input && !isNaN(+input) && +input > 0;
             },
             default: 10
         }]);

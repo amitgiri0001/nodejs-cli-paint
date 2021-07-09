@@ -1,3 +1,3 @@
 import { LineCoordinates } from "./LineCoordinatesModel";
 
-export class RectangleCoordinates extends LineCoordinates {}
+export type RectangleCoordinates = LineCoordinates

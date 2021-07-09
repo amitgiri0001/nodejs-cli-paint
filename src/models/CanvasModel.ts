@@ -1,4 +1,4 @@
-export class Canvas {
+export type Canvas = {
     height: number
     width: number
 }
