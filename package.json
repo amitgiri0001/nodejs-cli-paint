@@ -31,8 +31,7 @@
     "test": "jest --coverage",
     "test:watch": "jest --watch"
   },
-  "author": "Jakub Synowiec <github@jakubsynowiec.info>",
-  "license": "Apache-2.0",
+  "author": "Amit Giri <amitgiri0001>",
   "dependencies": {
     "inquirer": "^8.1.1",
     "tslib": "~2.2.0"
