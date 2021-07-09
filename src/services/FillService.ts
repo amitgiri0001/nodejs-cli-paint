@@ -1,8 +1,8 @@
 import {  HORIZONTAL_BOUNDARIES, LINE_INDICATOR, VERTICAL_BOUNDARIES } from "../Components";
 
 export class FillService {
-    tempCanvasMatrix: string[][] = [[]];
-    fillColor = 'c';
+    private tempCanvasMatrix: string[][] = [[]];
+    private fillColor = ' ';
 
     /**
      * 
@@ -12,7 +12,7 @@ export class FillService {
      * @param canvasMatrix Current canvas status
      * @returns new canvas matrix with painted value
      */
-    fill(x: number, y: number, color: string = this.fillColor,canvasMatrix: string[][]): string[][] {
+    fill(x: number, y: number, color: string, canvasMatrix: string[][]): string[][] {
         this.fillColor = color;
         this.tempCanvasMatrix = [...canvasMatrix];
         this.findAndFillCoordinates(x, y);
@@ -30,8 +30,6 @@ export class FillService {
 
         while(nodes.length > 0) {
             const { col, row } = nodes.pop();
-
-            if(!this.isInCanvasArea(row, col)) continue; 
             
             const currentNodeValue = this.tempCanvasMatrix[row][col];
             if(this.isInside(currentNodeValue)) continue;
@@ -53,9 +51,6 @@ export class FillService {
      * "Inside" means, it is not inside any "filled" area.
      */
     private isInside(currentNodeValue: string) {
-        // When the coordinates are not empty to be painted.
-        //if(currentNodeValue !== EMPTY_SPACE) return true;
-
         // When the node is not either of below
         if([VERTICAL_BOUNDARIES, HORIZONTAL_BOUNDARIES, LINE_INDICATOR].includes(currentNodeValue)) return true;
 
@@ -63,21 +58,5 @@ export class FillService {
         if(currentNodeValue === this.fillColor) return true;
 
         return false;
-    }
-
-    /**
-     * 
-     * @param row 
-     * @param col 
-     * @returns 
-     */
-    private isInCanvasArea(row: number, col: number) {
-        // When the rows are going out of range
-        if(row < 0 || row > this.tempCanvasMatrix.length - 1) return false;
-
-        // When the columns are going out of range
-        if(col < 0 || col > this.tempCanvasMatrix[row].length) return false;
-        
-        return true
     }
 }
