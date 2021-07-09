@@ -11,6 +11,7 @@ import { RectangleService } from '../../src/services/RectangleService';
 describe('OperationsInteractor (acceptance)', () => {
   let operationsInteractor: OperationsInteractor;
   let generateCanvasMatrixSpy: jest.SpyInstance;
+  jest.spyOn(console, 'log').mockImplementation(jest.fn());
 
   afterEach(() => {
     jest.clearAllMocks();
