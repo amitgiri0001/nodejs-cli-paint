@@ -120,6 +120,8 @@ describe('CliController (acceptance)', () => {
         describe('Quit Command', () => {
             it('should quit on command', async () => {
                 const renderSpy = jest.spyOn(CliController.prototype, 'render');
+                quitSpy.mockRestore();
+                const processExitSpy = jest.spyOn(process, 'exit').mockImplementation();
                 
                 const cli = new CliController();
                 
@@ -129,7 +131,7 @@ describe('CliController (acceptance)', () => {
                 await cli.drawingStartCommand();
     
                 expect(renderSpy).not.toHaveBeenCalled();
-                expect(quitSpy).toHaveBeenCalled();
+                expect(processExitSpy).toHaveBeenCalled();
             });
         });
     

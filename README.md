@@ -47,5 +47,5 @@ npm start
 ```
 npm test
 ```
-[show code coverage](img/code_coverage.png)
+[show code coverage](img/code_coverage_100.png)
 
