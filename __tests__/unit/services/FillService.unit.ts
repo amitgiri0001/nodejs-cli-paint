@@ -19,12 +19,12 @@ describe('FillService (unit)', () => {
         expect(filledMatrix).toEqual(FILLED_CANVAS_3_3_WITH_SMALL_LINE);
     });
 
-    it('should not fill of the color coordinates lies on drawing lines', async () => {
+    it('should not fill if the color coordinates lies over the drawing lines', async () => {
         const filledMatrix = fillService.fill(1, 1,  color, GIVEN_CANVAS_3_3_WITH_SMALL_LINE);
         expect(filledMatrix).toEqual(GIVEN_CANVAS_3_3_WITH_SMALL_LINE);
     });
 
-    it('should paint the portion considering canvas borders and random canvas splits', async () => {
+    it('should paint the portion considering canvas borders and random canvas partitions', async () => {
         const filledMatrix = fillService.fill(1, 1,  color, GIVEN_CANVAS_3_3_WITH_DIVIDING_LINE);
         expect(filledMatrix).toEqual(FILLED_CANVAS_3_3_WITH_DIVIDING_LINE);
     });

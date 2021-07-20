@@ -14,7 +14,7 @@ describe('Commands Validations', () => {
             await expect(fillValidator('AA')).rejects.not.toBe(true)
         });
 
-        it('should not accept color same as system characters', async () => {
+        it('should not accept color same as keywords', async () => {
             const fillValidator = FILL_PROMPT[0].validate;
 
             expect(FILL_PROMPT[0].name).toEqual('color');
